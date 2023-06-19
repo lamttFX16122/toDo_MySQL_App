@@ -14,7 +14,6 @@ export const login = (email, password, navigate) => async dispatch => {
             withCredentials: true
         });
         const res = await instance.post(url + 'login', { email, password });
-        console.log(res)
         dispatch({ type: type.LOGIN_SUCCESS, payload: res.data.payload });
         return navigate('/');
     } catch (error) {

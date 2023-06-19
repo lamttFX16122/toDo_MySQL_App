@@ -1,11 +1,13 @@
 import * as type from '../constants/actionType';
-const initialState = {
+let initialState = {
     token: null,
     user: null,
     sessionId: null,
-    loginFail: false
+    loginFail: false,
+    refreshToken: null,
+    refreshTokenFail: false
 }
-const authReducer = (state = initialState, action) => {
+let authReducer = (state = initialState, action) => {
     switch (action.type) {
         case type.LOGIN_SUCCESS:
             return {
@@ -13,7 +15,9 @@ const authReducer = (state = initialState, action) => {
                 token: action.payload.accessToken,
                 user: action.payload.user,
                 sessionId: action.payload.sessionId,
-                loginFail: false
+                refreshToken: action.payload.refreshToken,
+                loginFail: false,
+                refreshTokenFail: false
             }
         case type.LOGIN_FAIL:
             return {
@@ -28,15 +32,21 @@ const authReducer = (state = initialState, action) => {
                 token: null,
                 user: null,
                 sessionId: null,
-                loginFail: false
+                loginFail: false,
+                refreshToken: null,
+                refreshTokenFail: false
             };
         case type.REFRESH_TOKEN_SUCCESS:
             return {
                 ...state,
-                token: action.payload
+                token: action.payload,
+                refreshTokenFail: false
             }
         case type.REFRESH_TOKEN_FAIL:
-            return state;
+            return {
+                ...state,
+                refreshTokenFail: true
+            };
         case type.AUTH_CHANGE_INFO:
             return {
                 ...state,

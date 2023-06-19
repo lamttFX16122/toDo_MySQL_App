@@ -44,7 +44,6 @@ const HomePage = () => {
     const handleSearchCancel = () => {
         dispatch(endSearchWork());
     }
-    console.log(workReducer.worksProcess)
     const renderList = () => {
         if (workReducer.isSearch) {
             return (

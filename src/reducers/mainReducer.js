@@ -5,7 +5,7 @@ import workReducer from "./workReducer";
 import controlReducer from "./controlReducer";
 import userReducer from "./userReducer";
 import statisticalReducer from "./statisticalReducer";
-const mainReducer = combineReducers({
+let mainReducer = combineReducers({
     authReducer,
     formReducer,
     workReducer,

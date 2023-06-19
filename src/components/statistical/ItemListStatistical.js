@@ -1,10 +1,9 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
-import Collapse from 'react-bootstrap/Collapse';
-import { useState } from "react";
 const ItemListStatistical = (props) => {
     const { index, work, process } = props;
     // const [open, setOpen] = useState(false);
+    console.log(process)
     return (
         // <React.Fragment>
         <tr key={index}>

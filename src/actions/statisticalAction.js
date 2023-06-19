@@ -11,6 +11,7 @@ import { url } from '../shares/pageUrl';
  */
 export const statistical_Work = (userId, workStatus, page, token, axiosJWT) => async dispatch => {
     try {
+        console.log(`${url}statistical?workStatus=${workStatus}&page=${page}`)
         const statistical = await axiosJWT.get(`${url}statistical?workStatus=${workStatus}&page=${page}`,
             {
                 headers: {

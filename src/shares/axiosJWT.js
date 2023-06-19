@@ -1,19 +1,21 @@
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { url } from './pageUrl';
+import * as type from '../constants/actionType';
 /**
  * function refresh Token when token expired
  * @param {*} sessionId 
  * @returns 
  */
-const refreshToken = async (sessionId) => {
+const refreshToken = async (sessionId, refreshToken, dispatch) => {
     try {
-        const res = await axios.post(url + 'refreshToken', { sessionId }, {
+        const res = await axios.post(url + 'refreshToken', { sessionId, refreshToken }, {
             withCredentials: true
         });
         return res.data;
     } catch (error) {
         console.log(error);
+        dispatch({ type: type.REFRESH_TOKEN_FAIL });
     }
 }
 /**
@@ -29,14 +31,12 @@ export const createAxios = (authen, stateSuccess, dispatch) => {
         let date = new Date();
         const decoded = await jwtDecode(authen?.token);
         if (decoded.exp < date.getTime() / 1000) {
-            const data = await refreshToken(authen.sessionId);
-
+            const data = await refreshToken(authen.sessionId, authen.refreshToken, dispatch);
             dispatch({ type: stateSuccess, payload: data.payload.accessToken });
             config.headers['token'] = data.payload.accessToken;
         }
         return config;
     }, error => {
-        console.log(error);
         return Promise.reject(error);
     })
     return newInstance;
