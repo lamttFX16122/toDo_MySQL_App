@@ -24,7 +24,9 @@ const Navigation = () => {
         <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
             <Container>
                 <Navbar.Brand href="/">To Do</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Toggle aria-controls="responsive-navbar-nav">
+                    <i className="fa-solid fa-bars"></i>
+                </Navbar.Toggle>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <NavDropdown title="Thống kê" id="collasible-nav-dropdown">
